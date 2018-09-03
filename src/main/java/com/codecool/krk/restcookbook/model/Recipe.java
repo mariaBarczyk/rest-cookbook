@@ -1,21 +1,32 @@
 package com.codecool.krk.restcookbook.model;
 
+import javax.persistence.*;
 import java.util.Set;
 
+@Entity
+@Table(name = "recipe")
 public class Recipe {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "name", nullable = false)
     private String name;
 
+    @ManyToOne
     private User author;
 
+    @Column(name = "instruction", nullable = false)
     private String instruction;
 
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
     private Set<Ingredient> ingredients;
 
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
     private Set<Review> reviews;
 
+    @ManyToMany
     private Set<RecipeCategory> categories;
 
     public Recipe() {
