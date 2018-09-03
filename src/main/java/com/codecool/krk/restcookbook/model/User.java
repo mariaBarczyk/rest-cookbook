@@ -1,14 +1,24 @@
 package com.codecool.krk.restcookbook.model;
 
+import javax.persistence.*;
 import java.util.Set;
 
+@Entity
+@Table(name = "cookbook_user")
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nickName;
-    private LoginData loginData;
-    private Set<Recipe> recipes;
 
+    @Column(name = "nick_name", nullable = false, unique = true)
+    private String nickName;
+
+    @OneToOne
+    private LoginData loginData;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Recipe> recipes;
 
     public User() {
     }
@@ -54,5 +64,14 @@ public class User {
 
     public Set<Recipe> getRecipes() {
         return recipes;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", nickName='" + nickName + '\'' +
+                ", loginData=" + loginData +
+                '}';
     }
 }
