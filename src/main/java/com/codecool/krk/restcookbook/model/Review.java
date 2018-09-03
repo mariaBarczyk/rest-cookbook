@@ -1,23 +1,38 @@
 package com.codecool.krk.restcookbook.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "review")
 public class Review {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
     private int rating;
+
     private String opinion;
+
+    @ManyToOne
     private User author;
+
+    @ManyToOne
+    private Recipe recipe;
 
     public Review() {
     }
 
-    public Review(int rating, String opinion, User author) {
+    public Review(int rating, String opinion, User author, Recipe recipe) {
         this.rating = rating;
         this.opinion = opinion;
         this.author = author;
+        this.recipe = recipe;
     }
 
-    public Review(Long id, int rating, String opinion, User author) {
-        this(rating, opinion, author);
+    public Review(Long id, int rating, String opinion, User author, Recipe recipe) {
+        this(rating, opinion, author, recipe);
         this.id = id;
         this.author = author;
     }
@@ -38,6 +53,10 @@ public class Review {
         return author;
     }
 
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -52,5 +71,9 @@ public class Review {
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
     }
 }
