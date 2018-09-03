@@ -20,17 +20,21 @@ public class User {
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Recipe> recipes;
 
+    @OneToMany(mappedBy = "author")
+    private Set<Review> writtenReviews;
+
     public User() {
     }
 
-    public User(String nickName, LoginData loginData, Set<Recipe> recipes) {
+    public User(String nickName, LoginData loginData, Set<Recipe> recipes, Set<Review> writtenReviews) {
         this.nickName = nickName;
         this.loginData = loginData;
         this.recipes = recipes;
+        this.writtenReviews = writtenReviews;
     }
 
-    public User(Long id, String nickName, LoginData loginData, Set<Recipe> recipes) {
-        this(nickName, loginData, recipes);
+    public User(Long id, String nickName, LoginData loginData, Set<Recipe> recipes, Set<Review> writtenReviews) {
+        this(nickName, loginData, recipes, writtenReviews);
         this.id =id;
     }
 
@@ -44,6 +48,10 @@ public class User {
 
     public LoginData getLoginData() {
         return loginData;
+    }
+
+    public Set<Review> getWrittenReviews() {
+        return writtenReviews;
     }
 
     public void setId(Long id) {
@@ -64,6 +72,10 @@ public class User {
 
     public Set<Recipe> getRecipes() {
         return recipes;
+    }
+
+    public void setWrittenReviews(Set<Review> writtenReviews) {
+        this.writtenReviews = writtenReviews;
     }
 
     @Override
