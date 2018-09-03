@@ -27,6 +27,9 @@ public class Recipe {
     private Set<Review> reviews;
 
     @ManyToMany
+    @JoinTable(name = "category_of_recipe",
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<RecipeCategory> categories;
 
     public Recipe() {
