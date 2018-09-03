@@ -1,0 +1,21 @@
+package com.codecool.krk.restcookbook.model;
+
+public class RecipeCategory {
+
+    private String name;
+
+    public RecipeCategory() {
+    }
+
+    public RecipeCategory(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
